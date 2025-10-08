@@ -1,5 +1,6 @@
 import argparse
 import os
+import joblib
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -40,6 +41,10 @@ print("True labels:", y_test[:5])
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
 
+# Save Decision Tree model
+joblib.dump(model, 'outputs/decision_tree_model.pkl')
+print("Decision Tree model saved to outputs/decision_tree_model.pkl")
+
 # Generate and save confusion matrix
 cm = confusion_matrix(y_test, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=iris.target_names)
@@ -52,3 +57,7 @@ model2 = KNeighborsClassifier(n_neighbors=5)
 model2.fit(X_train, y_train)
 y_pred2 = model2.predict(X_test)
 print("k-NN accuracy:", accuracy_score(y_test, y_pred2))
+
+# Save k-NN model
+joblib.dump(model2, 'outputs/knn_model.pkl')
+print("k-NN model saved to outputs/knn_model.pkl")
